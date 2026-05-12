@@ -13,6 +13,8 @@ RUN apk add --no-cache ca-certificates tzdata && \
     mkdir -p /data && chown app:app /data
 WORKDIR /app
 COPY --from=build /out/server /app/server
+COPY templates /app/templates
+COPY static /app/static
 USER app
 EXPOSE 8080
 ENV DB_PATH=/data/portfolio.db PORT=8080

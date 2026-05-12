@@ -1,0 +1,35 @@
+{{define "base"}}<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{template "title" .}} — OG² Colorado Springs</title>
+    <meta name="description" content="OG² (OG squared) — rap duo out of Colorado Springs, CO." />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="/" class="logo og-math">OG<sup>2</sup></a>
+      <ul>
+        <li><a href="/about" class="{{if eq .Page "about"}}active{{end}}"><span class="nav-icon">🎙️</span>About</a></li>
+        <li><a href="/members" class="{{if eq .Page "members"}}active{{end}}"><span class="nav-icon">👥</span>Members</a></li>
+        <li><a href="/tracks" class="{{if eq .Page "tracks"}}active{{end}}"><span class="nav-icon">🎧</span>Tracks</a></li>
+        <li><a href="/shows" class="{{if eq .Page "shows"}}active{{end}}"><span class="nav-icon">🎤</span>Shows</a></li>
+        <li><a href="/contact" class="{{if eq .Page "contact"}}active{{end}}"><span class="nav-icon">✉️</span>Contact</a></li>
+      </ul>
+    </nav>
+
+    {{template "content" .}}
+
+    <footer>
+      <div>
+        &copy; <span id="year"></span>
+        <span class="og-math">OG<sup>2</sup></span> — Colorado Springs, CO
+      </div>
+      <div>Original · Squared</div>
+    </footer>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
+{{end}}

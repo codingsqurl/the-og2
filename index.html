@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OG² — Colorado Springs</title>
+    <meta
+      name="description"
+      content="OG² (OG squared) — rap duo out of Colorado Springs, CO."
+    />
+    <style>
+      :root {
+        --red: #c81414;
+        --red-deep: #6b0606;
+        --bone: #f5f1ea;
+        --ink: #0a0a0a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        color: var(--bone);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1.55;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        overflow-x: hidden;
+      }
+
+      /* ----- layout ----- */
+      main,
+      nav,
+      header,
+      footer,
+      section {
+        position: relative;
+        z-index: 1;
+      }
+
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 28px;
+        background: rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(200, 20, 20, 0.25);
+      }
+      nav .logo {
+        font-weight: 900;
+        letter-spacing: 0.05em;
+        font-size: 1.4rem;
+        color: var(--bone);
+        text-decoration: none;
+        opacity: 1;
+        text-transform: none;
+        transition: color 0.2s;
+      }
+      nav .logo:hover {
+        color: var(--red);
+        opacity: 1;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 22px;
+        margin: 0;
+        padding: 0;
+      }
+      nav a {
+        color: var(--bone);
+        text-decoration: none;
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.8;
+        transition:
+          color 0.2s,
+          opacity 0.2s;
+      }
+      nav a:hover {
+        color: var(--red);
+        opacity: 1;
+      }
+
+      section {
+        padding: 100px 8vw;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* ----- mathematical OG² ----- */
+      .og-math {
+        font-family: "Times New Roman", Times, serif;
+        font-style: italic;
+        font-weight: 700;
+        line-height: 1;
+        white-space: nowrap;
+      }
+      .og-math sup {
+        font-size: 0.55em;
+        vertical-align: super;
+        line-height: 0;
+        margin-left: 0.02em;
+      }
+
+      /* ----- hero ----- */
+      .hero {
+        min-height: 92vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 40px;
+      }
+      .hero .title {
+        font-size: clamp(6rem, 22vw, 18rem);
+        color: var(--bone);
+        text-shadow:
+          0 0 30px rgba(200, 20, 20, 0.45),
+          0 0 80px rgba(120, 0, 0, 0.35);
+      }
+      .hero .equation {
+        font-family: "Times New Roman", Times, serif;
+        font-style: italic;
+        font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+        color: rgba(245, 241, 234, 0.7);
+        margin-top: 18px;
+        letter-spacing: 0.04em;
+      }
+      .hero .tag {
+        margin-top: 30px;
+        font-size: 0.95rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--red);
+      }
+
+      /* ----- headings ----- */
+      h2.section-title {
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        margin: 0 0 12px;
+        letter-spacing: -0.01em;
+      }
+      .section-sub {
+        color: rgba(245, 241, 234, 0.55);
+        text-transform: uppercase;
+        letter-spacing: 0.25em;
+        font-size: 0.8rem;
+        margin-bottom: 40px;
+      }
+
+      /* ----- about ----- */
+      .about p {
+        max-width: 760px;
+        font-size: 1.1rem;
+        color: rgba(245, 241, 234, 0.85);
+      }
+      .about .equation-block {
+        margin-top: 36px;
+        padding: 24px 28px;
+        border-left: 3px solid var(--red);
+        background: rgba(20, 0, 0, 0.45);
+        font-family: "Times New Roman", Times, serif;
+        font-style: italic;
+        font-size: 1.25rem;
+        max-width: 720px;
+      }
+
+      /* ----- members ----- */
+      .members {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 28px;
+      }
+      .member {
+        background: rgba(10, 0, 0, 0.55);
+        border: 1px solid rgba(200, 20, 20, 0.25);
+        border-radius: 4px;
+        padding: 32px;
+        transition:
+          transform 0.3s,
+          border-color 0.3s,
+          box-shadow 0.3s;
+      }
+      .member:hover {
+        transform: translateY(-4px);
+        border-color: var(--red);
+        box-shadow: 0 12px 40px rgba(200, 20, 20, 0.2);
+      }
+      .member .num {
+        font-family: "Times New Roman", Times, serif;
+        font-style: italic;
+        color: var(--red);
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+      .member h3 {
+        font-size: 2rem;
+        margin: 0 0 6px;
+        letter-spacing: 0.02em;
+      }
+      .member .role {
+        font-size: 0.8rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(245, 241, 234, 0.55);
+        margin-bottom: 18px;
+      }
+      .member p {
+        color: rgba(245, 241, 234, 0.8);
+        margin: 0 0 16px;
+      }
+      .member .stats {
+        display: flex;
+        gap: 18px;
+        font-size: 0.85rem;
+        color: rgba(245, 241, 234, 0.6);
+        border-top: 1px solid rgba(200, 20, 20, 0.2);
+        padding-top: 14px;
+      }
+      .member .stats span strong {
+        color: var(--bone);
+        display: block;
+        font-size: 1rem;
+      }
+
+      /* ----- tracks ----- */
+      .tracks {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        border-top: 1px solid rgba(200, 20, 20, 0.2);
+      }
+      .track {
+        display: grid;
+        grid-template-columns: 50px 1fr auto auto;
+        gap: 20px;
+        align-items: center;
+        padding: 18px 8px;
+        border-bottom: 1px solid rgba(200, 20, 20, 0.15);
+        transition: background 0.2s;
+      }
+      .track:hover {
+        background: rgba(120, 0, 0, 0.12);
+      }
+      .track .idx {
+        font-family: "Times New Roman", Times, serif;
+        font-style: italic;
+        color: var(--red);
+        font-size: 1.1rem;
+      }
+      .track .title-row {
+        display: flex;
+        flex-direction: column;
+      }
+      .track .name {
+        font-size: 1.05rem;
+        font-weight: 600;
+      }
+      .track .feat {
+        font-size: 0.85rem;
+        color: rgba(245, 241, 234, 0.55);
+      }
+      .track .len {
+        color: rgba(245, 241, 234, 0.6);
+        font-variant-numeric: tabular-nums;
+      }
+      .track .play {
+        background: transparent;
+        border: 1px solid var(--red);
+        color: var(--bone);
+        padding: 6px 14px;
+        border-radius: 2px;
+        font-size: 0.8rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .track .play:hover {
+        background: var(--red);
+      }
+
+      /* ----- shows / calendar ----- */
+      .cal-wrap {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 36px;
+        align-items: start;
+      }
+      .cal {
+        background: rgba(10, 0, 0, 0.55);
+        border: 1px solid rgba(200, 20, 20, 0.25);
+        border-radius: 6px;
+        padding: 24px;
+      }
+      .cal-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .cal-head .month {
+        font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+      }
+      .cal-head .month .yr {
+        color: var(--red);
+        font-style: italic;
+        font-family: "Times New Roman", Times, serif;
+        font-weight: 400;
+        margin-left: 8px;
+      }
+      .cal-nav {
+        display: flex;
+        gap: 8px;
+      }
+      .cal-nav button {
+        background: transparent;
+        border: 1px solid rgba(200, 20, 20, 0.4);
+        color: var(--bone);
+        width: 34px;
+        height: 34px;
+        border-radius: 2px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.2s, border-color 0.2s;
+      }
+      .cal-nav button:hover {
+        background: var(--red);
+        border-color: var(--red);
+      }
+      .cal-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 4px;
+      }
+      .cal-grid .dow {
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(245, 241, 234, 0.45);
+        text-align: center;
+        padding: 8px 0;
+      }
+      .cal-day {
+        aspect-ratio: 1 / 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+        padding: 6px 8px;
+        font-size: 0.85rem;
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid transparent;
+        border-radius: 3px;
+        color: rgba(245, 241, 234, 0.75);
+        cursor: default;
+        transition: background 0.15s, border-color 0.15s;
+        position: relative;
+      }
+      .cal-day.muted {
+        color: rgba(245, 241, 234, 0.2);
+      }
+      .cal-day.today {
+        border-color: rgba(245, 241, 234, 0.4);
+      }
+      .cal-day.has-show {
+        background: rgba(200, 20, 20, 0.18);
+        border-color: var(--red);
+        color: var(--bone);
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .cal-day.has-show:hover,
+      .cal-day.active {
+        background: var(--red);
+        box-shadow: 0 0 18px rgba(200, 20, 20, 0.6);
+      }
+      .cal-day .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--bone);
+        align-self: flex-end;
+        margin-top: auto;
+      }
+      .cal-day:not(.has-show) .dot {
+        display: none;
+      }
+
+      .show-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .show-list .empty {
+        color: rgba(245, 241, 234, 0.5);
+        font-style: italic;
+        padding: 20px;
+        text-align: center;
+        border: 1px dashed rgba(200, 20, 20, 0.3);
+        border-radius: 4px;
+      }
+      .show-card {
+        display: grid;
+        grid-template-columns: 64px 1fr auto;
+        gap: 18px;
+        align-items: center;
+        padding: 16px 18px;
+        background: rgba(10, 0, 0, 0.55);
+        border-left: 3px solid var(--red);
+        border-radius: 3px;
+        transition: transform 0.2s, background 0.2s;
+      }
+      .show-card.active {
+        background: rgba(120, 0, 0, 0.35);
+        transform: translateX(4px);
+      }
+      .show-card .d {
+        text-align: center;
+        font-family: "Times New Roman", Times, serif;
+      }
+      .show-card .d .day-num {
+        display: block;
+        font-size: 1.8rem;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--bone);
+      }
+      .show-card .d .mo {
+        display: block;
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--red);
+        margin-top: 4px;
+      }
+      .show-card .info strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 2px;
+      }
+      .show-card .info span {
+        color: rgba(245, 241, 234, 0.6);
+        font-size: 0.85rem;
+      }
+      .show-card .ticket {
+        background: transparent;
+        border: 1px solid var(--red);
+        color: var(--bone);
+        padding: 8px 14px;
+        font-size: 0.75rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        border-radius: 2px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.2s;
+      }
+      .show-card .ticket:hover {
+        background: var(--red);
+      }
+      .show-card.tba .ticket {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      @media (max-width: 900px) {
+        .cal-wrap {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ----- contact ----- */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+      .contact-grid .info p {
+        color: rgba(245, 241, 234, 0.8);
+      }
+      .contact-grid a {
+        color: var(--red);
+        text-decoration: none;
+      }
+      .contact-grid a:hover {
+        text-decoration: underline;
+      }
+      .socials {
+        display: flex;
+        gap: 18px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+      .socials a {
+        padding: 10px 16px;
+        border: 1px solid rgba(200, 20, 20, 0.4);
+        border-radius: 2px;
+        font-size: 0.85rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--bone);
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .socials a:hover {
+        background: var(--red);
+        border-color: var(--red);
+        text-decoration: none;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      form input,
+      form textarea {
+        background: rgba(0, 0, 0, 0.55);
+        border: 1px solid rgba(200, 20, 20, 0.3);
+        color: var(--bone);
+        padding: 12px 14px;
+        border-radius: 2px;
+        font: inherit;
+      }
+      form textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      form input:focus,
+      form textarea:focus {
+        outline: none;
+        border-color: var(--red);
+      }
+      form button {
+        background: var(--red);
+        color: var(--bone);
+        border: none;
+        padding: 14px;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      form button:hover {
+        background: var(--red-deep);
+      }
+
+      /* ----- footer ----- */
+      footer {
+        padding: 40px 8vw;
+        border-top: 1px solid rgba(200, 20, 20, 0.2);
+        color: rgba(245, 241, 234, 0.55);
+        font-size: 0.85rem;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      @media (max-width: 700px) {
+        nav ul {
+          gap: 12px;
+        }
+        nav a {
+          font-size: 0.75rem;
+          letter-spacing: 0.05em;
+        }
+        section {
+          padding: 70px 6vw;
+        }
+        .track {
+          grid-template-columns: 36px 1fr auto;
+        }
+        .track .play {
+          display: none;
+        }
+        .show {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="#top" class="logo og-math">OG<sup>2</sup></a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#members">Members</a></li>
+        <li><a href="#tracks">Tracks</a></li>
+        <li><a href="#shows">Shows</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <header class="hero" id="top">
+      <div class="title og-math">OG<sup>2</sup></div>
+      <div class="equation">
+        ( OG )<sup style="font-size: 0.7em">2</sup> = OG · OG — twice the
+        original
+      </div>
+      <div class="tag">Colorado Springs · CO</div>
+    </header>
+
+    <section id="about" class="about">
+      <h2 class="section-title">About the Duo</h2>
+      <div class="section-sub">Origin · Pikes Peak</div>
+      <p>
+        <span class="og-math">OG<sup>2</sup></span> is a rap duo rooted in the
+        foothills of Colorado Springs. Two MCs, one frequency — raised on
+        mountain air, late-night sessions, and the kind of grind that doesn't
+        show up on a map. The name is a math problem: original, squared. Doubled
+        lineage, doubled output, doubled weight on every bar.
+      </p>
+      <p>
+        From basement studios off Academy to packed sets on Tejon Street, the
+        duo built a reputation for trading verses with the chemistry of brothers
+        and the precision of a punchline calculator. Hard drums, dust-bowl
+        samples, and writing that takes itself seriously without ever blinking.
+      </p>
+      <div class="equation-block">
+        <span class="og-math">OG<sup>2</sup></span> = ( bar + bar )<sup>2</sup>
+        &nbsp;—&nbsp; expanded form: bar² + 2(bar)(bar) + bar²
+      </div>
+    </section>
+
+    <section id="members">
+      <h2 class="section-title">The Members</h2>
+      <div class="section-sub">n = 2</div>
+      <div class="members">
+        <article class="member">
+          <div class="num">Member₁</div>
+          <h3>Lethal Cyris</h3>
+          <div class="role">Lead Vocals · Lyricist</div>
+          <p>
+            Born and raised on the east side of the Springs. Writes dense,
+            internal-rhyme verses stacked with local references — from Garden of
+            the Gods to the I-25 corridor at 2 a.m. Cut his teeth at open mics
+            in the Ivywild district.
+          </p>
+          <div class="stats">
+            <span><strong>15+</strong>Tracks released</span>
+            <span><strong>2019</strong>Started rapping</span>
+            <span><strong>COS</strong>Hometown</span>
+          </div>
+        </article>
+
+        <article class="member">
+          <div class="num">Member₂</div>
+          <h3>Mr. Niggro</h3>
+          <div class="role">Vocals · Production</div>
+          <p>
+            Producer-rapper hybrid. Builds the beats and trades bars on top of
+            them. Influences run from boom-bap to spacey trap with mountain
+            reverb. Operates out of a converted basement studio off Powers
+            Boulevard.
+          </p>
+          <div class="stats">
+            <span><strong>20+</strong>Beats produced</span>
+            <span><strong>2018</strong>Started producing</span>
+            <span><strong>COS</strong>Hometown</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="tracks">
+      <h2 class="section-title">Tracks</h2>
+      <div class="section-sub">Discography · Σ releases</div>
+      <div class="tracks">
+        <div class="track">
+          <div class="idx">01</div>
+          <div class="title-row">
+            <span class="name">Pikes Peak Anthem</span>
+            <span class="feat">single · 2024</span>
+          </div>
+          <div class="len">3:42</div>
+          <button class="play" type="button">Play</button>
+        </div>
+        <div class="track">
+          <div class="idx">02</div>
+          <div class="title-row">
+            <span class="name">Squared Up</span>
+            <span class="feat">single · 2024</span>
+          </div>
+          <div class="len">2:58</div>
+          <button class="play" type="button">Play</button>
+        </div>
+        <div class="track">
+          <div class="idx">03</div>
+          <div class="title-row">
+            <span class="name">Tejon Street Nights</span>
+            <span class="feat">single · 2025</span>
+          </div>
+          <div class="len">4:11</div>
+          <button class="play" type="button">Play</button>
+        </div>
+        <div class="track">
+          <div class="idx">04</div>
+          <div class="title-row">
+            <span class="name">Mile High Math</span>
+            <span class="feat">EP · 2025</span>
+          </div>
+          <div class="len">3:33</div>
+          <button class="play" type="button">Play</button>
+        </div>
+        <div class="track">
+          <div class="idx">05</div>
+          <div class="title-row">
+            <span class="name">Black Forest Smoke</span>
+            <span class="feat">single · 2025</span>
+          </div>
+          <div class="len">3:07</div>
+          <button class="play" type="button">Play</button>
+        </div>
+        <div class="track">
+          <div class="idx">06</div>
+          <div class="title-row">
+            <span class="name">Two of One</span>
+            <span class="feat">single · 2026</span>
+          </div>
+          <div class="len">3:55</div>
+          <button class="play" type="button">Play</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="shows">
+      <h2 class="section-title">Shows</h2>
+      <div class="section-sub">Tour Calendar · Front Range</div>
+      <div class="cal-wrap">
+        <div class="cal" id="calendar">
+          <div class="cal-head">
+            <div class="month">
+              <span id="cal-month-name">—</span><span class="yr" id="cal-year">—</span>
+            </div>
+            <div class="cal-nav">
+              <button type="button" id="cal-prev" aria-label="Previous month">‹</button>
+              <button type="button" id="cal-today" aria-label="Today" title="Today">●</button>
+              <button type="button" id="cal-next" aria-label="Next month">›</button>
+            </div>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+        </div>
+        <div class="show-list" id="show-list"></div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="section-sub">Booking · Press · Features</div>
+      <div class="contact-grid">
+        <div class="info">
+          <p>For booking, features, or press inquiries, reach out direct.</p>
+          <p>
+            Booking:
+            <a href="mailto:booking@ogsquared.com">booking@ogsquared.com</a
+            ><br />
+            Press: <a href="mailto:press@ogsquared.com">press@ogsquared.com</a
+            ><br />
+            Based in Colorado Springs, CO
+          </p>
+          <div class="socials">
+            <a href="#" rel="noopener">Instagram</a>
+            <a href="#" rel="noopener">Spotify</a>
+            <a href="#" rel="noopener">SoundCloud</a>
+            <a href="#" rel="noopener">YouTube</a>
+          </div>
+        </div>
+        <form
+          onsubmit="
+            event.preventDefault();
+            this.querySelector('button').textContent = 'Sent ·';
+          "
+        >
+          <input type="text" name="name" placeholder="Name" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <textarea name="msg" placeholder="Message" required></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        &copy; <span id="year"></span>
+        <span class="og-math">OG<sup>2</sup></span> — Colorado Springs, CO
+      </div>
+      <div>Original · Squared</div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // ---- Tour calendar ----
+      // Placeholder shows. Replace dates/venues when confirmed.
+      // Format: { date: 'YYYY-MM-DD', venue, city, note, ticketUrl, status: 'on-sale' | 'tba' | 'soon' }
+      const SHOWS = [
+        { date: "2026-06-13", venue: "[Venue Name]", city: "Colorado Springs, CO", note: "all ages", ticketUrl: "#", status: "tba" },
+        { date: "2026-07-04", venue: "[Venue Name]", city: "Manitou Springs, CO", note: "21+", ticketUrl: "#", status: "tba" },
+        { date: "2026-07-26", venue: "[Venue Name]", city: "Denver, CO", note: "co-headline", ticketUrl: "#", status: "tba" },
+        { date: "2026-08-15", venue: "[Venue Name]", city: "Pueblo, CO", note: "all ages", ticketUrl: "#", status: "tba" },
+        { date: "2026-09-12", venue: "[Venue Name]", city: "Fort Collins, CO", note: "21+", ticketUrl: "#", status: "tba" }
+      ];
+
+      const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      const MONTHS_SHORT = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+      const DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+      const today = new Date();
+      let viewYear = today.getFullYear();
+      let viewMonth = today.getMonth();
+      let activeKey = null;
+
+      const grid = document.getElementById("cal-grid");
+      const monthName = document.getElementById("cal-month-name");
+      const yearLabel = document.getElementById("cal-year");
+      const list = document.getElementById("show-list");
+
+      const showByKey = new Map(SHOWS.map(s => [s.date, s]));
+      const fmtKey = (y, m, d) => `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+
+      function renderCalendar() {
+        grid.innerHTML = "";
+        monthName.textContent = MONTHS[viewMonth];
+        yearLabel.textContent = viewYear;
+
+        DOW.forEach(d => {
+          const el = document.createElement("div");
+          el.className = "dow";
+          el.textContent = d;
+          grid.appendChild(el);
+        });
+
+        const first = new Date(viewYear, viewMonth, 1);
+        const startDay = first.getDay();
+        const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+        const prevMonthDays = new Date(viewYear, viewMonth, 0).getDate();
+
+        for (let i = startDay - 1; i >= 0; i--) {
+          const d = prevMonthDays - i;
+          const cell = document.createElement("div");
+          cell.className = "cal-day muted";
+          cell.innerHTML = `<span>${d}</span>`;
+          grid.appendChild(cell);
+        }
+
+        for (let d = 1; d <= daysInMonth; d++) {
+          const key = fmtKey(viewYear, viewMonth, d);
+          const cell = document.createElement("div");
+          cell.className = "cal-day";
+          if (
+            d === today.getDate() &&
+            viewMonth === today.getMonth() &&
+            viewYear === today.getFullYear()
+          ) cell.classList.add("today");
+          if (showByKey.has(key)) {
+            cell.classList.add("has-show");
+            cell.dataset.key = key;
+            cell.addEventListener("click", () => setActive(key));
+          }
+          if (key === activeKey) cell.classList.add("active");
+          cell.innerHTML = `<span>${d}</span><span class="dot"></span>`;
+          grid.appendChild(cell);
+        }
+
+        const total = startDay + daysInMonth;
+        const tail = (7 - (total % 7)) % 7;
+        for (let i = 1; i <= tail; i++) {
+          const cell = document.createElement("div");
+          cell.className = "cal-day muted";
+          cell.innerHTML = `<span>${i}</span>`;
+          grid.appendChild(cell);
+        }
+      }
+
+      function renderList() {
+        list.innerHTML = "";
+        const upcoming = SHOWS
+          .filter(s => new Date(s.date) >= new Date(today.toDateString()))
+          .sort((a,b) => a.date.localeCompare(b.date));
+
+        if (upcoming.length === 0) {
+          list.innerHTML = `<div class="empty">No upcoming dates. Check back soon.</div>`;
+          return;
+        }
+
+        upcoming.forEach(s => {
+          const [y, m, d] = s.date.split("-").map(Number);
+          const card = document.createElement("div");
+          card.className = "show-card" + (s.status === "tba" ? " tba" : "") + (s.date === activeKey ? " active" : "");
+          card.dataset.key = s.date;
+          card.innerHTML = `
+            <div class="d">
+              <span class="day-num">${d}</span>
+              <span class="mo">${MONTHS_SHORT[m-1]}</span>
+            </div>
+            <div class="info">
+              <strong>${s.venue}</strong>
+              <span>${s.city} · ${s.note}</span>
+            </div>
+            <a class="ticket" href="${s.ticketUrl}" target="_blank" rel="noopener">${s.status === "tba" ? "TBA" : "Tickets"}</a>
+          `;
+          card.addEventListener("click", (e) => {
+            if (e.target.classList.contains("ticket")) return;
+            setActive(s.date);
+            const [yy, mm] = s.date.split("-").map(Number);
+            viewYear = yy;
+            viewMonth = mm - 1;
+            renderCalendar();
+          });
+          list.appendChild(card);
+        });
+      }
+
+      function setActive(key) {
+        activeKey = activeKey === key ? null : key;
+        renderCalendar();
+        renderList();
+      }
+
+      document.getElementById("cal-prev").addEventListener("click", () => {
+        viewMonth--;
+        if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+        renderCalendar();
+      });
+      document.getElementById("cal-next").addEventListener("click", () => {
+        viewMonth++;
+        if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+        renderCalendar();
+      });
+      document.getElementById("cal-today").addEventListener("click", () => {
+        viewYear = today.getFullYear();
+        viewMonth = today.getMonth();
+        renderCalendar();
+      });
+
+      renderCalendar();
+      renderList();
+    </script>
+  </body>
+</html>

@@ -3,9 +3,12 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"html/template"
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
+	"sync"
 	"time"
 
 	"github.com/go-chi/chi/v5"
@@ -14,7 +17,11 @@ import (
 )
 
 type Server struct {
-	db *sql.DB
+	db           *sql.DB
+	templatesDir string
+	dev          bool
+	tplCache     map[string]*template.Template
+	tplMu        sync.RWMutex
 }
 
 type Project struct {
@@ -23,6 +30,10 @@ type Project struct {
 	Description string    `json:"description"`
 	URL         string    `json:"url,omitempty"`
 	CreatedAt   time.Time `json:"created_at"`
+}
+
+type PageData struct {
+	Page string
 }
 
 func main() {
@@ -41,7 +52,21 @@ func main() {
 		log.Fatalf("init schema: %v", err)
 	}
 
-	s := &Server{db: db}
+	templatesDir := os.Getenv("TEMPLATES_DIR")
+	if templatesDir == "" {
+		templatesDir = "/app/templates"
+	}
+	staticDir := os.Getenv("STATIC_DIR")
+	if staticDir == "" {
+		staticDir = "/app/static"
+	}
+
+	s := &Server{
+		db:           db,
+		templatesDir: templatesDir,
+		dev:          os.Getenv("DEV") == "1",
+		tplCache:     map[string]*template.Template{},
+	}
 
 	r := chi.NewRouter()
 	r.Use(middleware.RequestID)
@@ -53,14 +78,70 @@ func main() {
 	r.Get("/healthz", s.health)
 	r.Get("/api/projects", s.listProjects)
 
+	fs := http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir)))
+	r.Handle("/static/*", fs)
+
+	pages := []string{"home", "about", "members", "tracks", "shows", "contact"}
+	for _, p := range pages {
+		page := p
+		path := "/" + page
+		if page == "home" {
+			path = "/"
+		}
+		r.Get(path, func(w http.ResponseWriter, req *http.Request) {
+			s.renderPage(w, req, page)
+		})
+	}
+
+	r.NotFound(func(w http.ResponseWriter, req *http.Request) {
+		w.WriteHeader(http.StatusNotFound)
+		s.renderPage(w, req, "home")
+	})
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
-	log.Printf("listening on :%s", port)
+	log.Printf("listening on :%s (dev=%v)", port, s.dev)
 	if err := http.ListenAndServe(":"+port, r); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func (s *Server) renderPage(w http.ResponseWriter, _ *http.Request, page string) {
+	tpl, err := s.template(page)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	if err := tpl.ExecuteTemplate(w, "base", PageData{Page: page}); err != nil {
+		log.Printf("render %s: %v", page, err)
+	}
+}
+
+func (s *Server) template(page string) (*template.Template, error) {
+	if !s.dev {
+		s.tplMu.RLock()
+		t, ok := s.tplCache[page]
+		s.tplMu.RUnlock()
+		if ok {
+			return t, nil
+		}
+	}
+	t, err := template.ParseFiles(
+		filepath.Join(s.templatesDir, "base.html"),
+		filepath.Join(s.templatesDir, page+".html"),
+	)
+	if err != nil {
+		return nil, err
+	}
+	if !s.dev {
+		s.tplMu.Lock()
+		s.tplCache[page] = t
+		s.tplMu.Unlock()
+	}
+	return t, nil
 }
 
 func initSchema(db *sql.DB) error {

@@ -1,0 +1,29 @@
+{{define "title"}}Contact{{end}}
+{{define "content"}}
+<section>
+  <h2 class="section-title">Contact</h2>
+  <div class="section-sub">Booking · Press · Features</div>
+  <div class="contact-grid">
+    <div class="info">
+      <p>For booking, features, or press inquiries, reach out direct.</p>
+      <p>
+        Booking: <a href="mailto:booking@ogsquared.com">booking@ogsquared.com</a><br />
+        Press: <a href="mailto:press@ogsquared.com">press@ogsquared.com</a><br />
+        Based in Colorado Springs, CO
+      </p>
+      <div class="socials">
+        <a href="#" rel="noopener">Instagram</a>
+        <a href="#" rel="noopener">Spotify</a>
+        <a href="#" rel="noopener">SoundCloud</a>
+        <a href="#" rel="noopener">YouTube</a>
+      </div>
+    </div>
+    <form id="contact-form">
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <textarea name="msg" placeholder="Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+{{end}}
