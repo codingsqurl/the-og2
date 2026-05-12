@@ -145,6 +145,16 @@ section {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-card);
+  text-align: center;
+}
+section .section-sub,
+section h2.section-title {
+  text-align: center;
+}
+.about p,
+.about .equation-block {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ----- mathematical OG² ----- */
@@ -168,7 +178,8 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   padding: 40px 8vw 0;
   max-width: 1200px;
   margin: 0 auto;
@@ -708,31 +719,176 @@ footer {
   gap: 12px;
 }
 
-@media (max-width: 700px) {
-  nav ul {
-    gap: 12px;
+@media (max-width: 900px) {
+  nav {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 10px;
   }
-  nav a {
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
+  nav ul {
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
   }
   section {
-    padding: 70px 6vw;
+    padding: 50px 5vw;
+    margin: 30px auto;
+    border-radius: 8px;
+  }
+  .hero {
+    padding: 20px 5vw 0;
+    min-height: 80vh;
+  }
+  .hero .cta {
+    justify-content: center;
+  }
+  .members {
+    gap: 18px;
+  }
+  .member {
+    padding: 24px;
+  }
+  footer {
+    padding: 28px 5vw;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 700px) {
+  nav {
+    padding: 10px 12px;
+  }
+  nav .logo {
+    font-size: 1.2rem;
+  }
+  nav ul {
+    gap: 10px;
+  }
+  nav a {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+  }
+  .nav-icon {
+    margin-right: 4px;
+  }
+  section {
+    padding: 40px 5vw;
+    margin: 20px auto;
+  }
+  h2.section-title {
+    font-size: 2rem;
+  }
+  .section-sub {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+  }
+  .hero .equation {
+    font-size: 1rem;
+  }
+  .hero .tag {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+  }
+  .hero .cta a {
+    padding: 10px 16px;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+  }
+  .about p {
+    font-size: 1rem;
+  }
+  .about .equation-block {
+    font-size: 1rem;
+    padding: 18px 20px;
+  }
+  .members {
+    grid-template-columns: 1fr;
+  }
+  .member h3 {
+    font-size: 1.6rem;
+  }
+  .member .stats {
+    flex-wrap: wrap;
+    gap: 12px;
   }
   .track {
-    grid-template-columns: 36px 1fr auto;
+    grid-template-columns: 32px 1fr auto;
+    padding: 12px 14px;
+    gap: 12px;
   }
   .track .play {
     display: none;
   }
+  .track .name {
+    font-size: 0.95rem;
+  }
+  .cal {
+    padding: 16px;
+  }
+  .cal-head .month {
+    font-size: 1.1rem;
+  }
+  .cal-grid {
+    gap: 2px;
+  }
+  .cal-grid .dow {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    padding: 4px 0;
+  }
+  .cal-day {
+    font-size: 0.75rem;
+    padding: 4px 5px;
+  }
+  .cal-day .dot {
+    width: 4px;
+    height: 4px;
+  }
   .show-card {
     grid-template-columns: 56px 1fr;
+    padding: 14px;
+    gap: 14px;
   }
   .show-card .ticket {
     grid-column: 1 / -1;
     text-align: center;
   }
+  .show-card .d .day-num {
+    font-size: 1.5rem;
+  }
   .contact-grid {
     grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .socials a {
+    padding: 8px 14px;
+    font-size: 0.75rem;
+  }
+  form input,
+  form textarea {
+    padding: 12px 14px;
+  }
+  footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero .title {
+    font-size: 5rem;
+  }
+  .cal-day {
+    font-size: 0.65rem;
+    padding: 3px 3px;
+  }
+  .cal-nav button {
+    width: 30px;
+    height: 30px;
+    font-size: 0.85rem;
   }
 }
