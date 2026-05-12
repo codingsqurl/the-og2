@@ -3,6 +3,7 @@
 .dockerignore
 Dockerfile
 docker-compose.yml
+fly.toml
 *.md
 *.db
 data/
