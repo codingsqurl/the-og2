@@ -1,0 +1,6 @@
+/server
+*.db
+*.db-journal
+data/
+.env
+.env.local
